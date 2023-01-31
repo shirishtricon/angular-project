@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="d-flex justify-content-center">
+        
+        <h4>Filter By: </h4>
+        
+        <!-- Example single danger button -->
+        <div class="btn-group px-2">
+            <button type="button" class="btn btn-primary bg-transparent text-black dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                {{dropDownValue}}
+            </button>
+            <ul class="dropdown-menu" (click)="onSelected($event)" >
+                <li><a class="dropdown-item">Associate Software Engineer</a></li>
+                <li><a class="dropdown-item">Software Engineer</a></li>
+                <li><a class="dropdown-item">Senior Software Engineer</a></li>
+                <li><a class="dropdown-item">Senior Principal Engineer</a></li>
+            </ul>
+      </div>
+    </div>
+</div>

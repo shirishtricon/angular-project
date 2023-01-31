@@ -1,0 +1,12 @@
+.btn{
+    background-color: transparent;
+    border-color: brown;
+    color: black;
+}
+.btn:hover{
+    background-color: brown;
+    color: white;
+}
+p{
+    margin-bottom: 5px;
+}

@@ -1,0 +1,21 @@
+<div class="login-container">
+    <div class="d-flex pt-5 justify-content-center">
+        <img src="assets/logo/logo.png" alt="Tricon logo">
+        <h1>Tricon Infotech Private Limited</h1>
+    </div>
+    <div class="pt-5 text-center">
+        <h2>Login as:</h2>
+    </div>
+
+    <div class="role-container text-center pt-3">
+        <button type="button" (click)="hrClick()" class="btn btn-lg btn-outline-dark px-5"> HR </button>
+        <button type="button"(click)="managerClick()"  class="btn btn-lg btn-outline-dark ms-5">Manager</button>
+    </div>
+
+    <!-- <div *ngIf="role === 'hr'">
+        <app-loginPanel [role]="role"></app-loginPanel>
+    </div> -->
+
+    <app-loginPanel [newRole]="role" *ngIf="role"></app-loginPanel>
+    
+</div>

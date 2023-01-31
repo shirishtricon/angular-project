@@ -1,0 +1,30 @@
+<div class="container-fluid ">
+  <app-navbar></app-navbar>
+  <app-heading></app-heading>
+  <app-filter></app-filter>
+    <div class="card-container px-5 mx-5 d-flex flex-wrap  align-content-start">
+        <ng-container *ngIf="filteredEmployees.length > 0; else NoEmployee">
+          <div *ngFor="let employee of filteredEmployees" class="card m-3 shadow-sm" style="width: 15rem;" >
+            
+            <img class="card-img-top" alt="profile picture of {{employee.name}}" [src]="employee.image" style="width:238px; height:140px;">
+            <div class="card-body p-2 d-flex align-content-between flex-wrap">
+              <h5 class="card-title">{{employee.name}}</h5>
+              <div class="details-container">
+                <p>Employee ID: {{employee.emp_id}}</p>
+                <p>Designation: {{employee.designation}}</p>
+                <p>Experience: {{employee.experience}} Years</p>
+                <p>Skill: {{employee.skills}}</p>
+              </div>
+              <a class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+      </ng-container>
+      <ng-template #NoEmployee>
+        <div class=" mt-5">
+          <h1 class="float-center">No Employee Found with the given condition</h1>
+        </div>
+      </ng-template>
+        
+
+    </div>
+</div>
