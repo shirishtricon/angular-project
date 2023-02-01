@@ -8,11 +8,6 @@ import { Component } from '@angular/core';
 export class LoginComponent {
   role: string = '';
 
-  hrDetails = {
-    emp_id: 1223,
-    password: '123'
-  }
-
   hrClick() {
     this.role = 'HR';
   } 
