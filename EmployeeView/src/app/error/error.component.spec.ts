@@ -20,4 +20,9 @@ describe('ErrorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have the heading message in h1 tag', () => {
+    const data = fixture.nativeElement;
+    expect(data.querySelector('div > h1').textContent).toBe('404 Not Found: The page you are looking is not found')
+  })
 });

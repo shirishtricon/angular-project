@@ -6,7 +6,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AllEmployeesComponent } from './all-employees/all-employees.component';
 import { FilterComponent } from './filter/filter.component';
 import { HeadingComponent } from './heading/heading.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { LoginPanelComponent } from './login/loginPanel/loginPanel.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +28,8 @@ import { EmployeeCardService } from './employeeGuard.module';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   providers: [AuthService, EmployeeCardService],
   bootstrap: [AppComponent]

@@ -2,3 +2,12 @@
     background-color: #3B71CA !important;
     color: white !important;
 }
+#filterTag{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.btn-group{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}

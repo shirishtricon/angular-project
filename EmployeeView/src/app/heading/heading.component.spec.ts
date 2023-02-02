@@ -20,4 +20,9 @@ describe('HeadingComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have the heading as All Employees', () => {
+    const heading = fixture.nativeElement;
+    expect(heading.querySelector('h1').textContent).toBe('All Employees');
+  })
 });

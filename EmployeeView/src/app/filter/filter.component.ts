@@ -14,6 +14,7 @@ export class FilterComponent  {
 
   onSelected(value:any){
     //  = value
+    console.log(typeof value);
     this.dropDownValue = value.target.innerHTML;
     this.dataService.sendMessage(this.dropDownValue);
     console.log(this.dropDownValue);

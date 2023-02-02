@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AllEmployeesComponent } from './all-employees.component';
+import { By } from '@angular/platform-browser';
 
 describe('AllEmployeesComponent', () => {
   let component: AllEmployeesComponent;
@@ -24,5 +25,11 @@ describe('AllEmployeesComponent', () => {
 
   it('should have', () => {
     expect(component.newCriteria).toBe('')
-  })
+  });
+
+  it('should have the view type as card', () => {
+    const data = fixture.nativeElement;
+    expect(data.querySelector('.card')).toBeTruthy()
+  });
+
 });

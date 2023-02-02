@@ -42,7 +42,7 @@ describe('LoginComponent', () => {
   it('should contain two buttons', () => {
     const buttons = fixture.debugElement
     .queryAll(By.css('button'));
-    expect(buttons.length = 2).toBeTruthy()
+    expect(buttons.length).toBe(2)
   });
 
   it('should have button name as HR for first button', () => {
