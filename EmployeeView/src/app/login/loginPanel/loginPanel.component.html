@@ -5,20 +5,31 @@
           <div class="border border-3 border-brown"></div>
           <div class="card bg-white">
             <div class="card-body p-5">
-              <form class="mb-3 mt-md-4">
+              <form class="mb-3 mt-md-4" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
                 <h1 class="fw-bold mb-2 ">{{newRole}} Login</h1>
                 <p class=" mb-5">Please enter your Employee ID and Password!</p>
                 <div class="mb-3">
-                  <label for="emp_id" class="form-label ">Employee ID</label>
-                  <input type="text" class="form-control" id="email" placeholder="eg:1234" >
+                  <label for="empid" class="form-label ">Employee ID</label>
+                  <input type="text" class="form-control" id="empid" placeholder="eg:1234" formControlName = 'empid'>
+                </div>
+                <div>
+                  <span style="color:red"
+                  *ngIf="reactiveForm.get('empid').touched && !(reactiveForm.get('empid').valid)">Employee ID is required</span>
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label ">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="*******" #password>
+                  <input type="password" class="form-control" id="password" placeholder="*******" formControlName = 'password'>
+                </div>
+                <div>
+                  <span style="color:red"
+                  *ngIf="reactiveForm.get('password').touched && !(reactiveForm.get('password').valid)">Password is required</span>
                 </div>
                 
                 <div>
-                    <button class="btn btn-outline-dark" [routerLink]="'AllEmployees'" (click)="login()" type="submit" >Login</button>
+                    <button class="btn btn-outline-dark" type="submit" value="Submit">Login</button>
+                </div>
+                <div>
+                  <span *ngIf="invalidCondition()" style="color:red">Invalid Credentials</span>
                 </div>
               </form>
               

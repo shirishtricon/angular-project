@@ -29,7 +29,7 @@ import { EmployeeCardService } from './employeeGuard.module';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-
+    ReactiveFormsModule
   ],
   providers: [AuthService, EmployeeCardService],
   bootstrap: [AppComponent]
