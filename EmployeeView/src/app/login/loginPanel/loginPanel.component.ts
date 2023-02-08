@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginPanelComponent implements OnInit{
   @Input() newRole = '';
   reactiveForm: FormGroup;
+  formStatus;
 
   crdentials = {
     empid: 123,
@@ -25,7 +26,10 @@ export class LoginPanelComponent implements OnInit{
       empid: new FormControl(null, Validators.required),
       password: new FormControl(null,  Validators.required)
     });
-    
+    this.reactiveForm.statusChanges.subscribe((value) => {
+      console.log(value);
+      this.formStatus = value;
+    });
   }
 
 
@@ -63,7 +67,4 @@ export class LoginPanelComponent implements OnInit{
     
   }
 
-  isCorrect() {
-    return (this.reactiveForm.value.empid === this.crdentials.empid && this.reactiveForm.value.empid === this.crdentials.password)
-  }
 }

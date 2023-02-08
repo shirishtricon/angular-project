@@ -23,10 +23,9 @@ describe('LoginComponent', () => {
   });
 
   it('should have a logo with alt value as Tricon logo', () => {
-    const img = fixture.debugElement
-    .queryAll(By.css('img'));
-    const altValue: HTMLImageElement = img[0].nativeElement;
-    expect(altValue.alt).toBe('Tricon logo')
+    const img = fixture.debugElement.queryAll(By.css('img'));
+    const imgTag: HTMLImageElement = img[0].nativeElement;
+    expect(imgTag.alt).toBe('Tricon logo')
   })
 
   it('should have title Tricon Infotech Pvt Ltd', () => {    

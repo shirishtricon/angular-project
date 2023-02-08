@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ErrorComponent } from './error/error.component';
 import { AuthService } from './auth.service';
 import { EmployeeCardService } from './employeeGuard.module';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,13 +25,15 @@ import { EmployeeCardService } from './employeeGuard.module';
     HeadingComponent,
     LoginComponent,
     LoginPanelComponent,
-    ErrorComponent
+    ErrorComponent,
+    AddEmployeeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [AuthService, EmployeeCardService],
   bootstrap: [AppComponent]

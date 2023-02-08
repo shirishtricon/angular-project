@@ -4,12 +4,14 @@ import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
 import { EmployeeCardService } from './employeeGuard.module';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
 
 const appRoute: Routes = [
     {path: '', component: LoginComponent},
     // {path: '', redirectTo: 'Home', pathMatch: 'full'},
-    {path: 'AllEmployees', component: AllEmployeesComponent,  canActivate: [EmployeeCardService]},
-
+    {path: 'AllEmployees', component: AllEmployeesComponent},
+    {path: 'Employee', component: AddEmployeeComponent},
+    // canActivate: [EmployeeCardService]
     {path: '**', component:ErrorComponent}
 
  

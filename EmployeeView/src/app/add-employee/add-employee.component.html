@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="d-flex flex-wrap items-container">
+        <h1 class="text-center">Add Employee</h1>
+        <button class="btn btn-outline-dark mt-1" routerLink="/AllEmployees">Back</button>
+    </div>
+    <div class="form-container">
+        <div class="form-area">
+            <h3>Employee Details</h3>
+            <form #EmployeeForm="ngForm" (ngSubmit)="onEmployeeAdd(EmployeeForm.value)">
+                <label>Employee ID</label>
+              <input type="text" name="emp_id"ngModel>
+
+              <label>Employee Name</label>
+              <input type="text" name="name" ngModel>
+          
+              <label>Designation</label>
+              <input type="text" name="designation" ngModel>
+          
+              <label>Experience</label>
+              <input type="text" name="experience" ngModel>
+
+              <label>Skills</label>
+              <input type="text" name="skills" ngModel>
+
+              <label>Image Link</label>
+              <input type="text" name="image" ngModel>
+    
+              <input type="submit" value= "Add Employee">
+            </form>
+          </div>
+    </div>
+      
+</div>

@@ -3,23 +3,36 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { LoginPanelComponent } from './loginPanel.component';
 import { AuthService } from 'src/app/auth.service';
 import { By } from '@angular/platform-browser';
+import { Expression } from '@angular/compiler';
+import { empty } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormGroup } from '@angular/forms';
 
 
 describe('LoginPanelComponent', () => {
   let component: LoginPanelComponent;
   let fixture: ComponentFixture<LoginPanelComponent>;
-
+  let authService;
+  let spy: any
+  class RouterStub {
+    url = '';
+    navigate(commands: any[], extras?: any) { }
+}
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginPanelComponent ],
       providers: [AuthService],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      imports: []
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(LoginPanelComponent);
     component = fixture.componentInstance;
+    // let authService = new AuthService();
+    authService = TestBed.inject(AuthService);
     fixture.detectChanges();
+    
   });
 
   it('should create', () => {
@@ -67,10 +80,57 @@ describe('LoginPanelComponent', () => {
     expect(data.querySelector('button').textContent).toBe('Login')
   });
 
+  it('should give the error message if the Employee id field filed is empty', () => {
+    
+    const data = fixture.nativeElement;
+    expect(data.querySelector('div > form > .span-container ').textContent).toBe('');
+  })
+
   it('should call the login method on click of login button', () => {
     const buttonElement = fixture.debugElement.query(By.css('button'));
     const result = buttonElement.triggerEventHandler('click', component.login());
     expect(result).toBe()
-  })
+  });
+
+  it('should have valid credentials', () => {
+    expect(component.crdentials.empid).toBe(123);
+    expect(component.crdentials.password).toBe('admin')
+  });
+
+  it('form invalid when empty', () => {
+    
+    
+      expect(component.reactiveForm.valid).toBeFalsy();
+  
+  });
+
+  it('initial Employee ID field validity', () => {
+    let email = component.reactiveForm.controls['empid']; (1)
+    expect(email.valid).toBeFalsy(); 
+  });
+
+  it('initial password field validity', () => {
+    let email = component.reactiveForm.controls['password']; (1)
+    expect(email.valid).toBeFalsy(); 
+  });
+
+  it('invalid details', () => {
+    component.reactiveForm.get('empid').setValue(12);
+    component.reactiveForm.get('password').setValue('password');
+    expect(component.invalidCondition()).toBeTrue()
+  });
+
+  it('call onClick function on submitting form', () => {
+    spyOn(component,'onClick');
+    // component.onSubmit();
+    // expect(component.onClick).toHaveBeenCalled();
+    spyOn(authService,'login')
+    component.login();
+    expect(authService.login).toHaveBeenCalled();
+    fixture.detectChanges();
+    // expect(true)
+  });
+
+
 
 });

@@ -1,10 +1,10 @@
-  <div class="vh-100 d-flex justify-content-center align-items-center">
+  <div class="vh-100 d-flex justify-content-center align-items-center " >
     <div class="container">
       <div class="row d-flex justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
           <div class="border border-3 border-brown"></div>
           <div class="card bg-white">
-            <div class="card-body p-5">
+            <div class="card-body p-5 myForm" [ngClass]="formStatus">
               <form class="mb-3 mt-md-4" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
                 <h1 class="fw-bold mb-2 ">{{newRole}} Login</h1>
                 <p class=" mb-5">Please enter your Employee ID and Password!</p>
@@ -12,15 +12,15 @@
                   <label for="empid" class="form-label ">Employee ID</label>
                   <input type="text" class="form-control" id="empid" placeholder="eg:1234" formControlName = 'empid'>
                 </div>
-                <div>
-                  <span style="color:red"
-                  *ngIf="reactiveForm.get('empid').touched && !(reactiveForm.get('empid').valid)">Employee ID is required</span>
+                <div class="span-container">
+                  <p style="color:red"
+                  *ngIf="reactiveForm.get('empid').touched && !(reactiveForm.get('empid').valid)">Employee ID is required</p>
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label ">Password</label>
                   <input type="password" class="form-control" id="password" placeholder="*******" formControlName = 'password'>
                 </div>
-                <div>
+                <div class="span-container">
                   <span style="color:red"
                   *ngIf="reactiveForm.get('password').touched && !(reactiveForm.get('password').valid)">Password is required</span>
                 </div>
