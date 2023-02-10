@@ -3,8 +3,8 @@
   <app-heading></app-heading>
   <app-filter></app-filter>
     <div class="card-container px-5 mx-5 d-flex flex-wrap  align-content-start">
-        <ng-container *ngIf="filteredEmployees.length > 0; else NoEmployee">
-          <div *ngFor="let employee of filteredEmployees" class="card m-3 shadow-sm" style="width: 15rem;" >
+        <ng-container *ngIf="filteredEmployees.length > 0; else Loading">
+          <div *ngFor="let employee of filteredEmployees; index as indx" class="card m-3 shadow-sm" style="width: 15rem;" >
             
             <img class="card-img-top" alt="profile picture of {{employee.name}}" [src]="employee.image" style="width:238px; height:140px;">
             <div class="card-body p-2 d-flex align-content-between flex-wrap">
@@ -15,16 +15,104 @@
                 <p>Experience: {{employee.experience}} Years</p>
                 <p>Skill: {{employee.skills}}</p>
               </div>
-              <button class="btn btn-primary">View Details</button>
+              <div>
+                <button class="btn btn-primary"  (click)="setDefaultValues(indx, employee.id)" data-bs-toggle="modal" data-bs-target="#editModal"><i class="bi bi-pencil-square p-1"></i></button>
+                <button class="btn btn-primary deleteButton" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
+
+                <!-- delete Modal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-exclamation-triangle me-1"></i> Delete!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p><b>Are you sure?</b></p>
+                        <p>Employee Details will be deleted permanently!</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" (click)="onDeleteEmployee(employee.id)" data-bs-dismiss="modal">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Edit Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-pencil-square me-1 updateModal"></i> Update Details!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <!-- form -->
+
+                      <form (ngSubmit)="onEmployeeUpdate(updateForm)" #updateForm="ngForm" class="ms-2">
+                        <label>Employee ID</label>
+                        <input type="text" name="emp_id" ngModel  required #emp_id = ngModel disabled id="disabledInput">
+                        <div>
+                          <small *ngIf="emp_id.invalid && emp_id.touched">Employee ID is required</small>
+                        </div>
+          
+                        <label>Employee Name</label>
+                        <input type="text" name="name"  ngModel required #name = ngModel>
+                        <div>
+                          <small *ngIf="name.invalid && name.touched">Employee Name is required</small>
+                        </div>
+                    
+                        <label>Designation</label>
+                        <input type="text" name="designation" ngModel required #designation = ngModel>
+                        <div>
+                          <small *ngIf="designation.invalid && designation.touched">Designation is required</small>
+                        </div>
+                    
+                        <label>Experience</label>
+                        <input type="text" name="experience" ngModel required #experience = ngModel>
+                        <div>
+                          <small *ngIf="experience.invalid && experience.touched">Experience is required</small>
+                        </div>
+          
+                        <label>Skills</label>
+                        <input type="text" name="skills" ngModel required #skills = ngModel>
+                        <div>
+                          <small *ngIf="skills.invalid && skills.touched">Skills is required</small>
+                        </div>
+          
+                        <label>Image Link</label>
+                        <input type="text" name="image" ngModel required #image = ngModel>
+                        <div>
+                          <small *ngIf="image.invalid && image.touched">Image Link is required</small>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+                      </div>
+                      </form>
+
+                      
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
-        </div>
-      </ng-container>
+          </div>
+        </ng-container>
+
+      
+      <ng-template #Loading>
+        <ng-container class=" mt-5" *ngIf="isFetching; else NoEmployee">
+          <div id="cover-spin"></div>
+        </ng-container>
+      </ng-template>  
       <ng-template #NoEmployee>
-        <div class=" mt-5">
-          <h1 class="float-center noerror">No Employee Found with the given condition</h1>
-        </div>
-      </ng-template>
-        
+        <h1>No Employees Found</h1>
+      </ng-template>  
 
     </div>
 </div>
+
+
+<!-- (click)="onDeleteEmployee(employee.id)" -->

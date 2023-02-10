@@ -1,32 +1,84 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { DataService } from '../data.service';
+import { Employee } from '../Model/employees';
+import { EmployeeServices } from '../Services/employee.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-all-employees',
   templateUrl: './all-employees.component.html',
   styleUrls: ['./all-employees.component.css']
 })
-export class AllEmployeesComponent {
+export class AllEmployeesComponent implements OnInit{
 
   newCriteria: string ='';
+  isFetching: boolean = false;
+  errorMessage: string = null;
+  errorValue: string;
+  display: string;
+  currentEmployeeId ;
+  currentEmployeeIdStr: string;
 
-  constructor(private dataService: DataService) { }
-   allEmployees = [
-    { emp_id:11, name: "Vikram", designation: "Associate Software Engineer", experience: 5, skills: 'C++', image: 'assets/images/vikram.jpg'},
-    { emp_id:12, name: "Saurabh", designation: "Senior Principal Engineer", experience: 6, skills: 'Angular', image: 'assets/images/saurabh.jpg'},
-    { emp_id:13, name: "Manoj Kumar", designation: "Software Engineer", experience: 6, skills: 'Node.js', image: 'assets/images/manoj.jpeg'},
-    { emp_id:14, name: "Yogendra", designation: "Senior Software Engineer", experience: 8, skills: 'C#', image: 'assets/images/yogendra.jpg'},
-    { emp_id:15, name: "Sandeep", designation: "Senior Software Engineer", experience: 8, skills: 'React.js', image: 'assets/images/sandeep.jpeg'},
-    { emp_id:16, name: "Gagan", designation: "Senior Software Engineer", experience: 8, skills: 'Java', image: 'assets/images/cariappa.jpeg'},
-   ];
-
-   filteredEmployees = [...this.allEmployees];
-
-   ngOnInit(){
+  constructor(private dataService: DataService, private employeeServices: EmployeeServices) { }
+  allEmployees:Employee[] = [] ;
+  filteredEmployees= [];
+  @ViewChild('updateForm') form: NgForm;
+   
+  ngOnInit(){
+    this.fetchEmployees();
     this.dataService.filterMessage$.subscribe(data => {
+      
       this.newCriteria = data;
       console.log(this.newCriteria);
       this.filteredEmployees = this.allEmployees.filter(emp => emp.designation === this.newCriteria || emp.name.includes(this.newCriteria))
     })
-   }
+  }
+
+   fetchEmployees() {
+    this.isFetching = true;
+    this.employeeServices.fetchEmployee().subscribe((products) => {
+      this.allEmployees = products;
+      this.filteredEmployees = [...this.allEmployees];
+      console.log(this.allEmployees)
+      this.isFetching = false;
+    }, (err) => {
+    this.errorMessage = err.message;
+   })
+  }
+
+  onDeleteEmployee(id:string) {
+    this.employeeServices.deleteEmployee(id);
+    this.fetchEmployees()
+  }
+
+  setDefaultValues(indx:number, id:string) {
+   
+   let employee = this.allEmployees[`${indx}`];
+   this.form.setValue({
+    emp_id:employee.emp_id,
+    name: employee.name,
+    designation: employee.designation,
+    experience: employee.experience,
+    skills: employee.skills,
+    image: employee.image
+   });
+   this.currentEmployeeIdStr = id;
+   this.currentEmployeeId = employee.emp_id
+  }
+
+  onEmployeeUpdate(form) {
+    let updatedDetails = {
+      emp_id: this.currentEmployeeId,
+      name: form.value.name,
+      designation: form.value.designation,
+      experience: form.value.experience,
+      skills: form.value.skills,
+      image: form.value.image
+    };
+    this.employeeServices.updateEmployee(this.currentEmployeeIdStr, updatedDetails);
+    this.fetchEmployees()
+  }
+
+
+
 }

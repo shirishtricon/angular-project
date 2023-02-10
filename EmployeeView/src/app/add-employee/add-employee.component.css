@@ -37,3 +37,19 @@ input[type=text], select {
   input[type=submit]:hover {
     background-color: #1ABC9C;
   }
+
+  #ignismyModal .modal-header{
+      border:0px;
+  }
+  input.ng-invalid.ng-touched{
+    border: red 1px solid
+  }
+  small{
+    color: red
+  }
+  .bi-check-circle{
+    color: #8BC34A;
+  }
+  .bi-exclamation-triangle{
+    color: #eed202;
+  }

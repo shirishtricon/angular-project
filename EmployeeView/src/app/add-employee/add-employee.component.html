@@ -6,28 +6,64 @@
     <div class="form-container">
         <div class="form-area">
             <h3>Employee Details</h3>
-            <form #EmployeeForm="ngForm" (ngSubmit)="onEmployeeAdd(EmployeeForm.value)">
+            <form (ngSubmit)="onEmployeeAdd(employeeForm)" #employeeForm="ngForm">
                 <label>Employee ID</label>
-              <input type="text" name="emp_id"ngModel>
+              <input type="text" name="emp_id" ngModel required #emp_id = ngModel>
+              <div>
+                <small *ngIf="emp_id.invalid && emp_id.touched">Employee ID is required</small>
+              </div>
 
               <label>Employee Name</label>
-              <input type="text" name="name" ngModel>
+              <input type="text" name="name" ngModel required #name = ngModel>
+              <div>
+                <small *ngIf="name.invalid && name.touched">Employee Name is required</small>
+              </div>
           
               <label>Designation</label>
-              <input type="text" name="designation" ngModel>
+              <input type="text" name="designation" ngModel required #designation = ngModel>
+              <div>
+                <small *ngIf="designation.invalid && designation.touched">Designation is required</small>
+              </div>
           
               <label>Experience</label>
-              <input type="text" name="experience" ngModel>
+              <input type="text" name="experience" ngModel required #experience = ngModel>
+              <div>
+                <small *ngIf="experience.invalid && experience.touched">Experience is required</small>
+              </div>
 
               <label>Skills</label>
-              <input type="text" name="skills" ngModel>
+              <input type="text" name="skills" ngModel required #skills = ngModel>
+              <div>
+                <small *ngIf="skills.invalid && skills.touched">Skills is required</small>
+              </div>
 
               <label>Image Link</label>
-              <input type="text" name="image" ngModel>
+              <input type="text" name="image" ngModel required #image = ngModel>
+              <div>
+                <small *ngIf="image.invalid && image.touched">Image Link is required</small>
+              </div>
     
-              <input type="submit" value= "Add Employee">
+              <input type="submit" value= "Add Employee" [disabled]="!employeeForm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel" *ngIf="employeeAdded"><i class="bi bi-check-circle me-2"></i>Added!</h5>
+                      <h5 class="modal-title" id="exampleModalLabel" *ngIf="!employeeAdded"><i class="bi bi-exclamation-triangle me-2"></i>Enter All Details!</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" *ngIf="employeeAdded">            
+                      <p>Employee Details added successfully</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-transparent" data-bs-dismiss="modal">Ok</button>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
-          </div>
+        </div>
     </div>
-      
+    
 </div>

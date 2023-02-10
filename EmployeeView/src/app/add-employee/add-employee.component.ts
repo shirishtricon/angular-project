@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { Component, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { EmployeeServices } from '../Services/employee.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-employee',
@@ -7,12 +9,30 @@ import { HttpClient } from '@angular/common/http'
   styleUrls: ['./add-employee.component.css']
 })
 export class AddEmployeeComponent {
-  constructor( private http: HttpClient) { }
+  @ViewChild('employeeForm') form: NgForm;
+  employeeAdded: boolean = false;
+  constructor( private employeeServices: EmployeeServices) { }
 
-  onEmployeeAdd(employee: {emp_id:number, name:string, designation: string, experience: string, skills: string, image: string}) {
-    this.http.post<{name:string}>('https://angularbyshirish-default-rtdb.firebaseio.com/employee.json', employee)
-        .subscribe((res) => {
-            console.log(res);     
-        })
+  onEmployeeAdd(form) {
+    if(form.valid){
+      let employee = {
+        emp_id: form.value.emp_id,
+        name: form.value.name,
+        designation: form.value.designation,
+        experience: form.value.experience,
+        skills: form.value.skills,
+        image: form.value.image
+      }
+      this.employeeServices.addEmployee(employee);
+      this.form.reset();
+      this.employeeAdded = true
+    } else {
+      this.employeeAdded = false
+    }
   }
+  // onEmployeeAdd(employee: {emp_id:number, name:string, designation: string, experience: number, skills: string, image: string}) {
+  //   this.employeeServices.addEmployee(employee);
+  //   this.form.reset();
+  //   alert('Employee added successfully');
+  // }
 }

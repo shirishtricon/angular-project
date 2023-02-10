@@ -8,6 +8,7 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 
 const appRoute: Routes = [
     {path: '', component: LoginComponent},
+ 
     // {path: '', redirectTo: 'Home', pathMatch: 'full'},
     {path: 'AllEmployees', component: AllEmployeesComponent},
     {path: 'Employee', component: AddEmployeeComponent},

@@ -48,4 +48,10 @@ export class EmployeeServices {
         this.http.delete('https://angularbyshirish-default-rtdb.firebaseio.com/employee/'+id+'.json')
         .subscribe();
     }
+
+    // update employee details 
+    updateEmployee(id: string, value: Employee) {
+        this.http.put('https://angularbyshirish-default-rtdb.firebaseio.com/employee/'+id+'.json', value)
+        .subscribe()
+    }
 }

@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { EmployeeServices } from '../Services/employee.service';
+import { AllEmployeesComponent } from '../all-employees/all-employees.component';
+
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-heading',
@@ -7,4 +11,10 @@ import { Component } from '@angular/core';
 })
 export class HeadingComponent {
 
+  constructor() { }
+
+  
+  fetchEmployees() {
+    
+  }
 }

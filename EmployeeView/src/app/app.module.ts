@@ -16,6 +16,8 @@ import { EmployeeCardService } from './employeeGuard.module';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,9 +35,11 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+   
+    
   ],
   providers: [AuthService, EmployeeCardService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,]
 })
 export class AppModule { }
