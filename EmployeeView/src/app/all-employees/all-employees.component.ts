@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import { Employee } from '../Model/employees';
 import { EmployeeServices } from '../Services/employee.service';
 import { NgForm } from '@angular/forms';
+import { NgxUiLoaderService } from "ngx-ui-loader"
 
 @Component({
   selector: 'app-all-employees',
@@ -19,7 +20,7 @@ export class AllEmployeesComponent implements OnInit{
   currentEmployeeId ;
   currentEmployeeIdStr: string;
 
-  constructor(private dataService: DataService, private employeeServices: EmployeeServices) { }
+  constructor(private dataService: DataService, private employeeServices: EmployeeServices, private ngxService: NgxUiLoaderService) { }
   allEmployees:Employee[] = [] ;
   filteredEmployees= [];
   @ViewChild('updateForm') form: NgForm;
@@ -34,12 +35,22 @@ export class AllEmployeesComponent implements OnInit{
     })
   }
 
+  isfetchingEmployee() {
+    if(this.isFetching) {
+      this.ngxService.start();
+    } else {
+      this.ngxService.stop();
+    }
+  }
+
    fetchEmployees() {
+    this.ngxService.start();
     this.isFetching = true;
     this.employeeServices.fetchEmployee().subscribe((products) => {
       this.allEmployees = products;
       this.filteredEmployees = [...this.allEmployees];
       console.log(this.allEmployees)
+      this.ngxService.stop();
       this.isFetching = false;
     }, (err) => {
     this.errorMessage = err.message;

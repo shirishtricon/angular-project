@@ -104,7 +104,7 @@
       
       <ng-template #Loading>
         <ng-container class=" mt-5" *ngIf="isFetching; else NoEmployee">
-          <div id="cover-spin"></div>
+          <ngx-ui-loader fgsColor="white" text="Please Wait" fgsType="rectangle-bounce" ></ngx-ui-loader>
         </ng-container>
       </ng-template>  
       <ng-template #NoEmployee>

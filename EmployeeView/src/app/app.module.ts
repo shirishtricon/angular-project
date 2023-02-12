@@ -15,8 +15,7 @@ import { AuthService } from './auth.service';
 import { EmployeeCardService } from './employeeGuard.module';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { HttpClientModule } from '@angular/common/http';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -36,7 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-   
+    NgxUiLoaderModule
     
   ],
   providers: [AuthService, EmployeeCardService],
