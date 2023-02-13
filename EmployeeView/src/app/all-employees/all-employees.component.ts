@@ -19,6 +19,7 @@ export class AllEmployeesComponent implements OnInit{
   display: string;
   currentEmployeeId ;
   currentEmployeeIdStr: string;
+  acknowledgement: string;
 
   constructor(private dataService: DataService, private employeeServices: EmployeeServices, private ngxService: NgxUiLoaderService) { }
   allEmployees:Employee[] = [] ;
@@ -58,8 +59,11 @@ export class AllEmployeesComponent implements OnInit{
   }
 
   onDeleteEmployee(id:string) {
+    this.ngxService.start();
     this.employeeServices.deleteEmployee(id);
-    this.fetchEmployees()
+    this.acknowledgement = 'delete';
+    this.fetchEmployees();
+    this.ngxService.stop()
   }
 
   setDefaultValues(indx:number, id:string) {
@@ -78,6 +82,7 @@ export class AllEmployeesComponent implements OnInit{
   }
 
   onEmployeeUpdate(form) {
+    this.ngxService.start()
     let updatedDetails = {
       emp_id: this.currentEmployeeId,
       name: form.value.name,
@@ -87,9 +92,10 @@ export class AllEmployeesComponent implements OnInit{
       image: form.value.image
     };
     this.employeeServices.updateEmployee(this.currentEmployeeIdStr, updatedDetails);
-    this.fetchEmployees()
+    this.acknowledgement = 'update';
+    this.fetchEmployees();
+    this.ngxService.stop();
+    
   }
-
-
 
 }
