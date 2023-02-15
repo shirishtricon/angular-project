@@ -42,4 +42,5 @@
 # Thumbs.db
 ToDoList/node_modules
 navbar/node_modules
-EMS
+EmployeeView/node_modules
+EmployeeView Backend/node_modules
