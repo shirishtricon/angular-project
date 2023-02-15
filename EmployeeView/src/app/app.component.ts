@@ -9,7 +9,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'EmployeeView';
 
-  constructor() {}
+  constructor() {
+    localStorage.setItem("helloworld","ddd");
+  }
 
   // ngOnInit() {
   //   this.ngxService.start(); // start foreground spinner of the master loader with 'default' taskId

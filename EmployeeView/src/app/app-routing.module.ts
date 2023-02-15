@@ -5,15 +5,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
 import { EmployeeCardService } from './employeeGuard.module';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { ManagerViewComponent } from './manager-view/manager-view.component';
+import { AuthGuard } from './auth.guard';
 
 const appRoute: Routes = [
     {path: '', component: LoginComponent},
  
     // {path: '', redirectTo: 'Home', pathMatch: 'full'},
-    {path: 'AllEmployees', component: AllEmployeesComponent},
-    {path: 'Employee', component: AddEmployeeComponent},
-    // canActivate: [EmployeeCardService]
-    {path: '**', component:ErrorComponent}
+        {path: 'hr/AllEmployees', component: AllEmployeesComponent, canActivate: [EmployeeCardService], data: { role: 'HR'}},
+        {path: 'manager', component: ManagerViewComponent, canActivate: [EmployeeCardService], data: { role: 'Manager'}},
+        {path: 'Employee', component: AddEmployeeComponent},
+        // canActivate: [EmployeeCardService]
+        {path: '**', component:ErrorComponent}
 
  
   ]
