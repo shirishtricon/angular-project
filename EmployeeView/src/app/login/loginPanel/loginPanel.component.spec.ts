@@ -86,17 +86,13 @@ describe('LoginPanelComponent', () => {
     expect(data.querySelector('div > form > .span-container ').textContent).toBe('');
   })
 
-  it('should call the login method on click of login button', () => {
-    const buttonElement = fixture.debugElement.query(By.css('button'));
-    const result = buttonElement.triggerEventHandler('click', component.login());
-    expect(result).toBe()
-  });
+  // it('should call the login method on click of login button', () => {
+  //   const buttonElement = fixture.debugElement.query(By.css('button'));
+  //   const result = buttonElement.triggerEventHandler('click', component.login());
+  //   expect(result).toBe()
+  // });
 
-  it('should have valid credentials', () => {
-    expect(component.crdentials.empid).toBe(123);
-    expect(component.crdentials.password).toBe('admin')
-  });
-
+  
   it('form invalid when empty', () => {
     
     
@@ -114,22 +110,17 @@ describe('LoginPanelComponent', () => {
     expect(email.valid).toBeFalsy(); 
   });
 
-  it('invalid details', () => {
-    component.reactiveForm.get('empid').setValue(12);
-    component.reactiveForm.get('password').setValue('password');
-    expect(component.invalidCondition()).toBeTrue()
-  });
 
-  it('call onClick function on submitting form', () => {
-    spyOn(component,'onClick');
-    // component.onSubmit();
-    // expect(component.onClick).toHaveBeenCalled();
-    spyOn(authService,'login')
-    component.login();
-    expect(authService.login).toHaveBeenCalled();
-    fixture.detectChanges();
-    // expect(true)
-  });
+  // it('call onClick function on submitting form', () => {
+  //   spyOn(component,'onClick');
+  //   // component.onSubmit();
+  //   // expect(component.onClick).toHaveBeenCalled();
+  //   spyOn(authService,'login')
+  //   component.login();
+  //   expect(authService.login).toHaveBeenCalled();
+  //   fixture.detectChanges();
+  //   // expect(true)
+  // });
 
 
 

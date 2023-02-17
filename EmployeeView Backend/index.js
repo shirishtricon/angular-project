@@ -4,15 +4,18 @@ var bodyParser = require("body-parser");
 const app = express();
 const secretKey = 'secretKey';
 const cors = require('cors');
-
-const initializeApp =  require('firebase/app');
-const getFirestore = require('firebase/firestore/lite');
-const collection = require('firebase/firestore/lite');
-const getDocs = require('firebase/firestore/lite');
+const dbConnection = require('./Config/dbConnection')
+const dotenv = require("dotenv");
+const hrRoutes = require('./Routes/hrRoutes')
 
 app.use(cors({
     origin: '*'
 }));
+
+dotenv.config();
+
+app.use('/hr',hrRoutes);
+
 
 const hrDetails = {
     name: 'Shirish',
@@ -28,9 +31,6 @@ const managerDetails = {
     password: 'Manager'
 }
 
-app.get('/', (req, res) => {
-    res.json({message: 'A sample API'})
-});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -84,7 +84,7 @@ app.post('/profile',verifyToken,(req,res) => {
         if(err) {
             res.send({result: 'Invalid Token'})
         } else {
-            res.json({message: "profile accesed", authData})
+            res.json({message: "profile accessed", authData})
         }
     })
 })

@@ -106,9 +106,11 @@
           <ngx-ui-loader fgsColor="white" text="Please Wait" fgsType="rectangle-bounce" ></ngx-ui-loader>
         </ng-container> -->
       </ng-template>  
-      <ng-template #NoEmployee>
+      <!-- <ng-template #NoEmployee>
         <h1>No Employees Found</h1>
-      </ng-template>  
+      </ng-template>   -->
+
+      <h1 *ngIf="!isFetching && filteredEmployees.length <= 0">No Employees Found</h1>
 
       <!-- Acknowledgement modal -->
       <div class="modal fade" id="ackModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

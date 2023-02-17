@@ -48,7 +48,9 @@ export class AllEmployeesComponent implements OnInit{
     this.ngxService.start();
     this.isFetching = true;
     this.employeeServices.fetchEmployee().subscribe((products) => {
-      this.allEmployees = products;
+
+      console.log(typeof products)
+      this.allEmployees = products
       this.filteredEmployees = [...this.allEmployees];
       console.log(this.allEmployees)
       this.ngxService.stop();

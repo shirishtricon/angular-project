@@ -28,14 +28,17 @@ export class EmployeeServices {
         .set('Access-Control-Allow-Origin','*')
 
         const params = new HttpParams().set('print','pretty').set('pageNum',1)
-        return this.http.get<{[key: string]: Employee}>('https://angularbyshirish-default-rtdb.firebaseio.com/employee.json', {'headers': header, params:params})
+        return this.http.get<{[data: string]: Employee}>('http://localhost:5000/hr/employees', {'headers': header})
         .pipe(map((res) => {
-          const employees = []
-          for(const key in res) {
-            if(res.hasOwnProperty(key)) {
-              employees.push({...res[key], id: key})
+
+          const employees = [];
+    
+          for(const data in res) {
+            if(res.hasOwnProperty(length)) {
+              employees.push({...res[data], id: data})
             }
           }
+      
           return employees;
         }), catchError((err) => {
             // write the logic for logging errors

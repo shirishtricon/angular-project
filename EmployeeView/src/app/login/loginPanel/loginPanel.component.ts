@@ -60,11 +60,16 @@ export class LoginPanelComponent implements OnInit{
       }, (error) => {
         this.status = 'undone'
         this.message = 'Invalid Credentials'
+        if(error.status === 401) {
+          alert('Invalid Credentials')
+        } else {
+          alert('invalid response from Server')
+        }
       });
  
     } else {
-      this.status = 'intermediate'
-      this.message = 'Please enter all details'
+      
+      alert('Please enter all details');
     }
     
   }
