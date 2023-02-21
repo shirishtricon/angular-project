@@ -23,6 +23,7 @@ export class LoginPanelComponent implements OnInit{
   message: string = null;
 
   ngOnInit() {
+    
     this.reactiveForm = new FormGroup({
       empid: new FormControl(null, Validators.required),
       password: new FormControl(null,  Validators.required)

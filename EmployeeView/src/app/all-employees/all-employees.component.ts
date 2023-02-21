@@ -20,6 +20,8 @@ export class AllEmployeesComponent implements OnInit{
   currentEmployeeId ;
   currentEmployeeIdStr: string;
   acknowledgement: string;
+  employeeToBeDeleted: number;
+ 
 
   constructor(private dataService: DataService, private employeeServices: EmployeeServices, private ngxService: NgxUiLoaderService) { }
   allEmployees:Employee[] = [] ;
@@ -27,7 +29,9 @@ export class AllEmployeesComponent implements OnInit{
   @ViewChild('updateForm') form: NgForm;
    
   ngOnInit(){
-    this.fetchEmployees();
+
+      this.fetchEmployees();
+
     this.dataService.filterMessage$.subscribe(data => {
       
       this.newCriteria = data;
@@ -60,9 +64,13 @@ export class AllEmployeesComponent implements OnInit{
    })
   }
 
-  onDeleteEmployee(id:string) {
-    this.ngxService.start();
-    this.employeeServices.deleteEmployee(id);
+  toDeleteEmployee(index: number) {
+    let employee = this.allEmployees[`${index}`];
+    this.employeeToBeDeleted = employee.emp_id;
+  }
+
+  onDeleteEmployee() {
+    this.employeeServices.deleteEmployee(this.employeeToBeDeleted);
     this.acknowledgement = 'delete';
     this.fetchEmployees();
     this.ngxService.stop()
@@ -71,29 +79,29 @@ export class AllEmployeesComponent implements OnInit{
   setDefaultValues(indx:number, id:string) {
    
    let employee = this.allEmployees[`${indx}`];
-   this.form.setValue({
-    emp_id:employee.emp_id,
+   this.form.form.patchValue({
     name: employee.name,
     designation: employee.designation,
     experience: employee.experience,
     skills: employee.skills,
     image: employee.image
-   });
+   });  
    this.currentEmployeeIdStr = id;
-   this.currentEmployeeId = employee.emp_id
+   this.currentEmployeeId = employee.emp_id;
   }
+
 
   onEmployeeUpdate(form) {
     this.ngxService.start()
     let updatedDetails = {
-      emp_id: this.currentEmployeeId,
+  
       name: form.value.name,
       designation: form.value.designation,
       experience: form.value.experience,
       skills: form.value.skills,
       image: form.value.image
     };
-    this.employeeServices.updateEmployee(this.currentEmployeeIdStr, updatedDetails);
+    this.employeeServices.updateEmployee(this.currentEmployeeId, updatedDetails);
     this.acknowledgement = 'update';
     this.fetchEmployees();
     this.ngxService.stop();

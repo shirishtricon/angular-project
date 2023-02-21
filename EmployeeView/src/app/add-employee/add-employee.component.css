@@ -21,7 +21,7 @@ input[type=text], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-  }
+}
   
   input[type=submit] {
     width: 30%;
@@ -32,24 +32,27 @@ input[type=text], select {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
+}
   
   input[type=submit]:hover {
     background-color: #1ABC9C;
-  }
+}
 
   #ignismyModal .modal-header{
       border:0px;
-  }
+}
   input.ng-invalid.ng-touched{
     border: red 1px solid
-  }
+}
   small{
     color: red
-  }
+}
   .bi-check-circle{
     color: #8BC34A;
-  }
+}
   .bi-exclamation-triangle{
     color: #eed202;
-  }
+}
+.bi-x-circle{
+  color:red;
+}
