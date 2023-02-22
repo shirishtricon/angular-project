@@ -7,6 +7,7 @@ import { EmployeeCardService } from './employeeGuard.module';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ManagerViewComponent } from './manager-view/manager-view.component';
 import { AuthGuard } from './auth.guard';
+import { AddDepartmentComponent } from './add-department/add-department.component';
 
 const appRoute: Routes = [
     {path: '', component: LoginComponent},
@@ -15,6 +16,7 @@ const appRoute: Routes = [
         {path: 'hr/AllEmployees', component: AllEmployeesComponent, canActivate: [EmployeeCardService], data: { role: 'HR'}},
         {path: 'manager', component: ManagerViewComponent, canActivate: [EmployeeCardService], data: { role: 'Manager'}},
         {path: 'Employee', component: AddEmployeeComponent},
+        {path: 'Department', component: AddDepartmentComponent},
         // canActivate: [EmployeeCardService]
         {path: '**', component:ErrorComponent}
 

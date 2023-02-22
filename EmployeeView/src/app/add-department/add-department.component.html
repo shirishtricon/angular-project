@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="d-flex flex-wrap items-container">
+        <h1 class="text-center">Add Employee</h1>
+        <button class="btn btn-outline-dark mt-1" routerLink="/hr/AllEmployees">Back</button>
+    </div>
+    <div class="form-container">
+        <div class="form-area">
+            <h3>Employee Details</h3>
+            <form (ngSubmit)="onDepartmentAdd(departmentForm)" #departmentForm="ngForm">
+
+              <label>Department Name</label>
+              <input type="text" name="dept_name" ngModel required #dept_name = ngModel>
+              <div>
+                <small *ngIf="dept_name.invalid && dept_name.touched">Department Name is required</small>
+              </div>
+          
+              <label>Department Head</label>
+              <input type="text" name="dept_head" ngModel required #dept_head = ngModel>
+              <div>
+                <small *ngIf="dept_head.invalid && dept_head.touched">Department Head is required is required</small>
+              </div>
+    
+              <input type="submit" value= "Add Department" [disabled]="!departmentForm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel" *ngIf="departmentAdded === 'Done'"><i class="bi bi-check-circle me-2"></i>Added!</h5>
+                      <h5 class="modal-title" id="exampleModalLabel" *ngIf="departmentAdded === 'Empty'"><i class="bi bi-exclamation-triangle me-2"></i>Warning!</h5>
+                      <h5 class="modal-title  me-4 pr-5" id="exampleModalLabel" *ngIf="departmentAdded === 'Error'"><i class="bi bi-x-circle me-2"></i>Error!</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" *ngIf="departmentAdded === 'Done'">            
+                      <p>Employee Details added successfully. Details:</p>
+                      <p><b>Department ID:</b> {{lastDeptId}}</p>
+                      <p><b>Department Name:</b> {{lastDeptName}}</p>
+                    </div>
+                    <div class="modal-body" *ngIf="departmentAdded === 'Error'">            
+                      <p>Department not added!</p>
+                    </div>
+                    <div class="modal-body" *ngIf="departmentAdded === 'Empty'">            
+                      <p>Please enter all Details</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-transparent" data-bs-dismiss="modal">Ok</button>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
+    
+</div>

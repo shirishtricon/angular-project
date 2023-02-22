@@ -15,6 +15,7 @@ import { AuthService } from './auth.service';
 import { EmployeeCardService } from './employeeGuard.module';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ManagerViewComponent } from './manager-view/manager-view.component';
+import { AddDepartmentComponent } from './add-department/add-department.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
@@ -29,7 +30,8 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     LoginPanelComponent,
     ErrorComponent,
     AddEmployeeComponent,
-    ManagerViewComponent
+    ManagerViewComponent,
+    AddDepartmentComponent
   ],
   imports: [
     BrowserModule,

@@ -25,12 +25,36 @@ export class NavbarComponent {
     this.dataService.sendMessage(this.empValue)
   }
 
+  spin(value:boolean) {
+    if(value === true) {
+      this.ngxService.start();
+    } else {
+      this.ngxService.stop();
+    }
+  }
+
   logout(){
     this.authService.logout();
-    this.ngxService.start();
+    this.spin(true);
     setTimeout(() => {
-      this.ngxService.stop();
+      this.spin(false);
       this._router.navigate(['']);
+    }, 2000)
+  }
+
+  onEmployeeClick() {
+    this.spin(true);
+    setTimeout(() => {
+      this.spin(false);
+      this._router.navigate(['/Employee']);
+    }, 2000)
+  }
+
+  onDepartmentClick() {
+    this.spin(true);
+    setTimeout(() => {
+      this.spin(false);
+      this._router.navigate(['/Department']);
     }, 2000)
   }
 }

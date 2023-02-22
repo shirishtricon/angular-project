@@ -20,8 +20,12 @@
                 <small *ngIf="designation.invalid && designation.touched">Designation is required</small>
               </div>
           
-              <label>Experience</label>
-              <input type="text" name="experience" ngModel required #experience = ngModel>
+              <label>Experience</label><br>
+              <!-- <input type="text" name="experience" ngModel required #experience = ngModel> -->
+              <select style="width: 120px;" name="experience" id="experience" #experience = ngModel [ngModel]="defaultExperience" >
+                
+                <option  *ngFor="let num of nums" value="{{num}}">{{num}}</option>              
+              </select>
               <div>
                 <small *ngIf="experience.invalid && experience.touched">Experience is required</small>
               </div>

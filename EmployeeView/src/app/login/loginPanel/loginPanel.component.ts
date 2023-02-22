@@ -39,7 +39,7 @@ export class LoginPanelComponent implements OnInit{
 
   onClick() {
     if(this.reactiveForm.valid) {
-      this.employeeServices.login(`${this.reactiveForm.value.empid}`, this.reactiveForm.value.password, this.newRole).subscribe((response) => {
+      this.employeeServices.login(this.reactiveForm.value.empid, this.reactiveForm.value.password, this.newRole).subscribe((response) => {
 
         localStorage.setItem('token',response.token);
         this.authService.login(this.newRole);
