@@ -44,7 +44,10 @@ input[type=text], select {
   input.ng-invalid.ng-touched{
     border: red 1px solid
 }
-select.ng-invalid.ng-touched{
+select.ng-invalid.ng-touched.is-invalid{
+  border: red 1px solid
+}
+.is-invalid{
   border: red 1px solid
 }
   small{

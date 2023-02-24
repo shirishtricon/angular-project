@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const uuid = require('uuid')
 const conn = require('../Config/dbConnection');
 const cors = require('cors');
 
@@ -9,7 +9,7 @@ app.use(cors({
 }));
 
 const readAllDetails = (req,res) => {
-    conn.query('select * from employee', (err,data) => {
+    conn.query('select emp_id, name, designation, experience, skills, image, dept_name from employee inner join department on employee.dept_id = department.dept_id', (err,data) => {
         if (err) {
             throw err;
         }
@@ -23,8 +23,10 @@ const addEmployee = (req, res) => {
     let experience = +req.body.experience;
     let skills = req.body.skills;
     let image = req.body.image;
+    let dept_id = +req.body.dept_id;
+    let emp_uuid = uuid.v1();
 
-    let query = `INSERT INTO employee (name, designation, experience, skills, image) VALUES ("${name}", "${designation}", ${experience}, "${skills}", "${image}")`;
+    let query = `INSERT INTO employee (name, designation, experience, skills, image, dept_id, uuid) VALUES ("${name}", "${designation}", ${experience}, "${skills}", "${image}", "${dept_id}", "${emp_uuid}")`;
     conn.query(query, function(err, result) {
         if (err) {
             res.status(500).json({message: 'Internal Server error'})

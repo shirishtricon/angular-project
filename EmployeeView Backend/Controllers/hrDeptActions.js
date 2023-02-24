@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const uuid = require('uuid')
 
 const conn = require('../Config/dbConnection');
 const cors = require('cors');
@@ -7,7 +8,8 @@ const cors = require('cors');
 const addDept = (req, res) => {
     let dept_name = req.body.dept_name;
     let dept_head = req.body.dept_head;
-    let query = `insert into department(dept_name, dept_head) values ("${dept_name}", "${dept_head}")`;
+    let dept_uuid = uuid.v1();
+    let query = `insert into department(dept_name, dept_head, uuid) values ("${dept_name}", "${dept_head}", "${dept_uuid}")`;
 
     conn.query(query, (err, result) => {
         if(err) {
@@ -26,7 +28,7 @@ const addDept = (req, res) => {
 }
 
 const getAllDepts = (req, res) => {
-    conn.query('select dept_name from department', (err, result) => {
+    conn.query('select * from department', (err, result) => {
         if(err) {
             throw err;
         }

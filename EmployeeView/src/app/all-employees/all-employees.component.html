@@ -12,6 +12,7 @@
               <h5 class="card-title">{{employee.name}}</h5>
               <div class="details-container">
                 <p>Employee ID: {{employee.emp_id}}</p>
+                <p>Department: {{employee.dept_name}}</p>
                 <p>Designation: {{employee.designation}}</p>
                 <p>Experience: {{employee.experience}} Years</p>
                 <p>Skill: {{employee.skills}}</p>
@@ -65,10 +66,21 @@
                           <small *ngIf="designation.invalid && designation.touched">Designation is required</small>
                         </div>
                     
-                        <label>Experience</label>
-                        <input type="text" name="experience" ngModel required #experience = ngModel>
+                        <label>Experience</label><br>
+                        <select style="width: 120px;" name="experience" id="experience" #experience = ngModel [ngModel]="defaultExperience" >                
+                          <option  *ngFor="let num of nums" value="{{num}}">{{num}}</option>              
+                        </select>
                         <div>
                           <small *ngIf="experience.invalid && experience.touched">Experience is required</small>
+                        </div>
+
+                        <label>Department</label><br>
+                        <select style="width: 300px;" name="department" class="form-control" required [class.is-invalid]="department.touched && department.invalid" #department = ngModel ngModel [(ngModel)]="model.dept_name" >                
+                          <option value="" >Select Department</option>
+                          <option  *ngFor="let dept of allDepartments" [value]="dept.dept_name">{{dept.dept_name}}</option>              
+                        </select>
+                        <div>
+                          <small *ngIf="department.invalid && department.touched">Department is required</small>
                         </div>
           
                         <label>Skills</label>

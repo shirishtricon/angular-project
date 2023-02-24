@@ -37,3 +37,7 @@ input[type=text], select {
   .bi-exclamation-triangle{
     color: #eed202;
   }
+
+  .is-invalid{
+    border: red 1px solid
+  }
