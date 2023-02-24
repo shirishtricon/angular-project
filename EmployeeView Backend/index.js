@@ -19,7 +19,7 @@ app.use('/hr',hrRoutes);
 
 
 const hrDetails = {
-    name: 'Shirish',
+    name: 'Shirish Kulkarni',
     role: 'HR',
     emp_id: 123,
     password: 'admin'

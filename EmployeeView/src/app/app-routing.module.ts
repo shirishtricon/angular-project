@@ -15,8 +15,8 @@ const appRoute: Routes = [
     // {path: '', redirectTo: 'Home', pathMatch: 'full'},
         {path: 'hr/AllEmployees', component: AllEmployeesComponent, canActivate: [EmployeeCardService], data: { role: 'HR'}},
         {path: 'manager', component: ManagerViewComponent, canActivate: [EmployeeCardService], data: { role: 'Manager'}},
-        {path: 'Employee', component: AddEmployeeComponent},
-        {path: 'Department', component: AddDepartmentComponent},
+        {path: 'Employee', component: AddEmployeeComponent, canActivate: [EmployeeCardService], data: { role: 'HR'}},
+        {path: 'Department', component: AddDepartmentComponent, canActivate: [EmployeeCardService], data: { role: 'HR'}},
         // canActivate: [EmployeeCardService]
         {path: '**', component:ErrorComponent}
 
