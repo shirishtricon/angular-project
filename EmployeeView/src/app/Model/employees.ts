@@ -6,4 +6,5 @@ export class Employee {
     experience: number;
     skills: string;
     image: string;
+    uuid: string;
 }

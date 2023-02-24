@@ -9,7 +9,7 @@ app.use(cors({
 }));
 
 const readAllDetails = (req,res) => {
-    conn.query('select emp_id, name, designation, experience, skills, image, dept_name from employee inner join department on employee.dept_id = department.dept_id', (err,data) => {
+    conn.query('select emp_id, name, designation, experience, skills, image, dept_name, employee.uuid from employee inner join department on employee.dept_id = department.dept_id', (err,data) => {
         if (err) {
             throw err;
         }
@@ -24,7 +24,7 @@ const addEmployee = (req, res) => {
     let skills = req.body.skills;
     let image = req.body.image;
     let dept_id = +req.body.dept_id;
-    let emp_uuid = uuid.v1();
+    let emp_uuid = uuid.v4();
 
     let query = `INSERT INTO employee (name, designation, experience, skills, image, dept_id, uuid) VALUES ("${name}", "${designation}", ${experience}, "${skills}", "${image}", "${dept_id}", "${emp_uuid}")`;
     conn.query(query, function(err, result) {
@@ -34,7 +34,7 @@ const addEmployee = (req, res) => {
         } else {
             conn.query('select emp_id, name from employee order by emp_id desc limit 1', (err, result) => {
                 if(err) {
-                    throw err;
+                    throw err; 
                 } else {
                     res.status(200).json({result: result})
                 }
@@ -45,12 +45,12 @@ const addEmployee = (req, res) => {
 };
 
 const deleteEmployee = (req, res) => {
-    let emp_id = +req.params.emp_id;
-    let query = `delete from employee where emp_id = ${emp_id}`;
+    let uuid = req.params.uuid;
+    let query = `delete from employee where uuid = "${uuid}"`;
     
     conn.query(query, (err, result) => {
         if(err) {
-            res.status(500).json({message: "Internal serve error"});
+            res.status(500).json({message: "Internal server error"});
         }
         else {
             res.status(200).json({message: "Employee deleted successfully"})
@@ -59,11 +59,11 @@ const deleteEmployee = (req, res) => {
 }
 
 const editEmployee = (req,res) => {
-    let emp_id = +req.params.emp_id;
-    if(!emp_id || req.body.emp_id) {
+    let uuid = req.params.uuid;
+    if(!uuid || req.body.uuid) {
         res.status(400).json({message: "Bad Request!"})
     } else {
-        conn.query(`update employee set ? where emp_id = ?`,[req.body, emp_id], (err, result) => {
+        conn.query(`update employee set ? where uuid = ?`,[req.body, uuid], (err, result) => {
             if(err) {
                 res.status(500).json({message: "Internal Server error"})
             } else {

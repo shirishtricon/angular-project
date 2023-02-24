@@ -22,13 +22,13 @@ export class AllEmployeesComponent implements OnInit{
   currentEmployeeId ;
   currentEmployeeIdStr: string;
   acknowledgement: string;
-  employeeToBeDeleted: number;
+  uuidToBeDeleted: string;
   nums = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
   allDepartments = [];
   filtertedDept :any;
   model: DepartmentModel = new DepartmentModel();
   defaultExperience = 0;
- 
+  currentUuid;
 
   constructor(private dataService: DataService, 
               private employeeServices: EmployeeServices, 
@@ -77,11 +77,11 @@ export class AllEmployeesComponent implements OnInit{
 
   toDeleteEmployee(index: number) {
     let employee = this.allEmployees[`${index}`];
-    this.employeeToBeDeleted = employee.emp_id;
+    this.uuidToBeDeleted = employee.uuid;
   }
 
   onDeleteEmployee() {
-    this.employeeServices.deleteEmployee(this.employeeToBeDeleted);
+    this.employeeServices.deleteEmployee(this.uuidToBeDeleted);
     this.acknowledgement = 'delete';
     this.fetchEmployees();
     this.ngxService.stop()
@@ -102,6 +102,7 @@ export class AllEmployeesComponent implements OnInit{
    });  
    this.currentEmployeeIdStr = id;
    this.currentEmployeeId = employee.emp_id;
+   this.currentUuid = employee.uuid;
   }
 
 
@@ -120,7 +121,7 @@ export class AllEmployeesComponent implements OnInit{
     };
     console.log(updatedDetails);
     
-    this.employeeServices.updateEmployee(this.currentEmployeeId, updatedDetails);
+    this.employeeServices.updateEmployee(this.currentUuid, updatedDetails);
     this.acknowledgement = 'update';
     this.fetchEmployees();
     this.ngxService.stop();

@@ -17,7 +17,8 @@ router.get('/departments', verifyToken('HR'), deptActions.getAllDepts)
 router.post('/addEmployee', verifyToken('HR'), empActions.addEmployee);
 router.post('/addDepartment',verifyToken('HR'), deptActions.addDept)
 
-router.delete('/delete/:emp_id', verifyToken('HR'), empActions.deleteEmployee);
-router.put('/edit/:emp_id', verifyToken('HR'), empActions.editEmployee)
+router.delete('/delete/:uuid', verifyToken('HR'), empActions.deleteEmployee);
+
+router.put('/edit/:uuid', verifyToken('HR'), empActions.editEmployee)
  
 module.exports = router;    

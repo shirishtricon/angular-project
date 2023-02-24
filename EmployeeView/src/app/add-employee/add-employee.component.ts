@@ -61,15 +61,12 @@ export class AddEmployeeComponent implements OnInit{
 
   fetchDepartments() {
     this.departmentServices.fetchDepartments().subscribe((departments) => {
-
       console.log(typeof departments)
-
       this.allDepartments = [...departments];
       console.log(this.allDepartments)
-
     }, (err) => {
-    throw err;
-   })
+      throw err;
+    })
   }
 
   resolveDeptNameToId(dept_name:string): number {

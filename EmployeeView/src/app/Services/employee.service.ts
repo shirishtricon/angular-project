@@ -44,24 +44,24 @@ export class EmployeeServices {
   }
 
   //delete Employee from database
-  deleteEmployee(id: number) {
+  deleteEmployee(uuid: string) {
     let token = localStorage.getItem('token');
     let header = new HttpHeaders()
     .set('content-type','application/json')
     .set('Access-Control-Allow-Origin','*')
     .set('token',token)
-      this.http.delete(`http://localhost:5000/hr/delete/${id}`, {'headers': header})
+      this.http.delete(`http://localhost:5000/hr/delete/${uuid}`, {'headers': header})
       .subscribe();
   }
 
   // update employee details 
-  updateEmployee(id: string, value: any) {
+  updateEmployee(uuid: string, value: any) {
     let token = localStorage.getItem('token');
     let header = new HttpHeaders()
     .set('content-type','application/json')
     .set('Access-Control-Allow-Origin','*')
     .set('token',token)
-    this.http.put(`http://localhost:5000/hr/edit/${id}`, value, {headers:header})
+    this.http.put(`http://localhost:5000/hr/edit/${uuid}`, value, {headers:header})
     .subscribe()
   }
 
