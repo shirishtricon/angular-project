@@ -5,14 +5,14 @@ const conn = require('../Config/dbConnection');
 const cors = require('cors');
 const db = require('../models');
 
-const Employee = db.employee
+const Employees = db.sequelize.models.employees;
 
 app.use(cors({
     origin: '*'
 }));    
 
 const readAllDetails = async(req,res) => {
-    const data = await Employee.findAll({})
+    const data = await Employees.findAll({})
     res.status(200).send(data)
     // conn.query('select emp_id, name, designation, experience, skills, image, dept_name, employee.uuid from employee inner join department on employee.dept_id = department.dept_id', (err,data) => {
     //     if (err) {

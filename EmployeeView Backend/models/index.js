@@ -1,27 +1,21 @@
-const dbConfig = require('../Config/dbConnection')
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize,DataTypes } = require('sequelize');
+const dotenv = require("dotenv");
 
-const sequelize = new Sequelize(
-    dbConfig.DB,
-    dbConfig.USER,
-    dbConfig.PASSWORD, {
-        host: dbConfig.HOST,
-        dialect: dbConfig.dialect,
-        operatorsAliases: false,
 
-        pool: {
-            max: dbConfig.pool.max, 
-            min: dbConfig.pool.min, 
-            acquire: dbConfig.pool.acquire, 
-            idle: dbConfig.pool.idle
-        }
-    }
-)
+dotenv.config();
 
-sequelize.authenticate().then(() => {
-    console.log('DB Connected successfully')
-}).catch((err) => {
-    console.log(err);
+const sequelize = new Sequelize(process.env.database, process.env.user, process.env.password, {
+    host: process.env.host,
+    dialect: 'mysql',
+    pool: { max:5, min: 0, idle: 10000}
+});
+
+sequelize.authenticate()
+.then(() => {
+    console.log('DB connected successfully');
+})
+.catch((err) => {
+    console.log('Error', err);
 });
 
 const db = {}
@@ -29,11 +23,19 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.employee = require('./employee')(sequelize, DataTypes);
-db.department = require('./department')(sequelize, DataTypes)
+db.departments = require('./departments')(sequelize, DataTypes);
+db.employees = require('./employees')(sequelize, DataTypes);
 
-db.sequelize.sync({force: false}).then (() => {
-    console.log('Yes. re-syc done!');
+db.departments.hasMany(db.employees);
+
+db.employees.belongsTo(db.departments)
+
+db.sequelize.sync({force: false})
+.then(() => {
+    console.log('yes re-sync');
+})
+.catch((err) => {
+    console.log(err);
 })
 
 module.exports = db;

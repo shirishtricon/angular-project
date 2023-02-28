@@ -4,9 +4,11 @@ var bodyParser = require("body-parser");
 const app = express();
 const secretKey = 'secretKey';
 const cors = require('cors');
-const { db }= require('./Config/dbConnection')
+
 const dotenv = require("dotenv");
 const hrRoutes = require('./Routes/hrRoutes')
+
+require('./models')
 
 app.use(cors({
     origin: '*'
