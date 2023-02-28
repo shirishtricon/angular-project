@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { catchError, map, Observable, Subject, throwError } from 'rxjs';
 import { Employee } from '../Model/employees';
+import { DepartmentModel } from '../Model/departments';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class DepartmentService {
     .set('Access-Control-Allow-Origin','*')
     .set('token',token)
     const params = new HttpParams().set('print','pretty').set('pageNum',1)
-    return this.http.get<{[data: string]: Employee}>('http://localhost:5000/hr/departments', {headers: header})
+    return this.http.get<{[data: string]: DepartmentModel}>('http://localhost:5000/hr/departments', {headers: header})
     .pipe(map((res) => {
       const departments = [];
       for(const data in res) {

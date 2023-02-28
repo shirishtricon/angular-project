@@ -6,9 +6,10 @@ button{
     margin-left: 50% !important;   
 }
 .form-area{
-    width: 30%;
+    width: 80%;
     padding: 10px 15px;
 }
+
 .product-display-area{
     width: 50%;
     padding: 10px 15px;
@@ -24,7 +25,7 @@ input[type=text], select {
 }
   
   input[type=submit] {
-    width: 50%;
+    width: auto;
     background-color: #48C9B0;
     color: white;
     padding: 14px 20px;
@@ -62,3 +63,24 @@ select.ng-invalid.ng-touched{
 #experience option{
   width: 120px !important;
 }
+#products th {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: left;
+  background-color: gainsboro;
+  color: black;
+}
+td{
+  padding: 2px 3px;
+}
+#products {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+
+#products tr:nth-child(even){background-color: #f2f2f2;}
+
+#products tr:hover {background-color: #ddd;}

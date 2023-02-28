@@ -3,7 +3,8 @@
         <h1 class="text-center">Add Department</h1>
         <button class="btn btn-outline-dark mt-1" routerLink="/hr/AllEmployees">Back</button>
     </div>
-    <div class="form-container">
+    <div class="d-flex ">
+      <div class="form-container">
         <div class="form-area">
             <h3>Department Details</h3>
             <form (ngSubmit)="onDepartmentAdd(departmentForm)" #departmentForm="ngForm">
@@ -50,6 +51,29 @@
               </div>
             </form>
         </div>
+      </div>
+      <div class="product-display-area" >
+        <h3>All Departments</h3>
+        <table id="products">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Department Head</th>
+            
+            <th></th>
+            <th></th>
+          </tr>
+          <tr *ngFor="let department of allDepartments; index as i">
+            <td>{{i+1}}</td>
+            <td>{{department.dept_name}}</td>
+            <td>{{department.dept_head}}</td>
+            <!-- <td>abcd</td> -->
+            <td><button class="btn btn-transparent" >Delete</button></td>
+            <td><button class="btn btn-transparent">Edit</button></td>
+          </tr>
+        </table>
+        <hr>
+      </div>
     </div>
     
 </div>

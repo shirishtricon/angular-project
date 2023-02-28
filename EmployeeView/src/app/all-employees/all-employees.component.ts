@@ -34,14 +34,14 @@ export class AllEmployeesComponent implements OnInit{
               private employeeServices: EmployeeServices, 
               private ngxService: NgxUiLoaderService,
               private departmentServices: DepartmentService) { }
-  allEmployees:Employee[] = [] ;
+  allEmployees:any;
   filteredEmployees= [];
   @ViewChild('updateForm') form: NgForm;
    
   ngOnInit(){
 
       this.fetchEmployees();
-      this.fetchDepartments();
+      // this.fetchDepartments();
 
     this.dataService.filterMessage$.subscribe(data => {
       
@@ -64,10 +64,9 @@ export class AllEmployeesComponent implements OnInit{
     this.isFetching = true;
     this.employeeServices.fetchEmployee().subscribe((products) => {
 
-      console.log(typeof products)
       this.allEmployees = products
-      this.filteredEmployees = [...this.allEmployees];
-      console.log(this.allEmployees)
+      this.filteredEmployees = this.allEmployees;
+      console.log(this.filteredEmployees)
       this.ngxService.stop();
       this.isFetching = false;
     }, (err) => {

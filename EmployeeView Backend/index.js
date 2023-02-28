@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 const app = express();
 const secretKey = 'secretKey';
 const cors = require('cors');
-const dbConnection = require('./Config/dbConnection')
+const { db }= require('./Config/dbConnection')
 const dotenv = require("dotenv");
 const hrRoutes = require('./Routes/hrRoutes')
 
@@ -15,7 +15,10 @@ app.use(express.json());
 
 dotenv.config();
 
+
+
 app.use('/hr',hrRoutes);
+
 
 
 const hrDetails = {

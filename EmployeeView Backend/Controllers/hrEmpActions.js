@@ -3,18 +3,23 @@ const app = express();
 const uuid = require('uuid')
 const conn = require('../Config/dbConnection');
 const cors = require('cors');
+const db = require('../models');
+
+const Employee = db.employee
 
 app.use(cors({
     origin: '*'
-}));
+}));    
 
-const readAllDetails = (req,res) => {
-    conn.query('select emp_id, name, designation, experience, skills, image, dept_name, employee.uuid from employee inner join department on employee.dept_id = department.dept_id', (err,data) => {
-        if (err) {
-            throw err;
-        }
-        res.status(200).send(data);
-    })
+const readAllDetails = async(req,res) => {
+    const data = await Employee.findAll({})
+    res.status(200).send(data)
+    // conn.query('select emp_id, name, designation, experience, skills, image, dept_name, employee.uuid from employee inner join department on employee.dept_id = department.dept_id', (err,data) => {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     res.status(200).send(data);
+    // })
 };
 
 const addEmployee = (req, res) => {

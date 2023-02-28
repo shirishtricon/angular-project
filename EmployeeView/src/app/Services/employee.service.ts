@@ -31,6 +31,8 @@ export class EmployeeServices {
     const params = new HttpParams().set('print','pretty').set('pageNum',1)
     return this.http.get<{[data: string]: Employee}>('http://localhost:5000/hr/employees', {headers: header})
     .pipe(map((res) => {
+ 
+      
       const employees = [];
       for(const data in res) {
         if(res.hasOwnProperty(length)) {
