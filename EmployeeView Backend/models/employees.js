@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        departmentUuid: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
         // dept_id: {
         //     type: DataTypes.INTEGER,
         //     allowNull: false,
@@ -45,6 +49,9 @@ module.exports = (sequelize, DataTypes) => {
     },         
     {
         timestamps: false
-    });
+    },
+    {
+		initialAutoIncrement: 1000
+	});
     return employees;
 }

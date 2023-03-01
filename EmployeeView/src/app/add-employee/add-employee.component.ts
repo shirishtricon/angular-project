@@ -38,15 +38,14 @@ export class AddEmployeeComponent implements OnInit{
         name: form.value.name,
         designation: form.value.designation,
         experience: form.value.experience,
-        dept_id: `${this.resolveDeptNameToId(form.value.department)}`,
         skills: form.value.skills,
         image: form.value.image,
-    
+        departmentUuid: `${this.resolveDeptNameToUuid(form.value.department)}`
       }
       this.employeeServices.addEmployee(employee).subscribe((res) => {
         this.employeeAdded = 'Done';
-        this.lastEmployeeId = res['result'][0].emp_id;
-        this.lastEmployeeName = res['result'][0].name
+        this.lastEmployeeId = res.result.emp_id;
+        this.lastEmployeeName = res.result.name
         console.log(res['result'][0].emp_id);     
       }, (err) => {
           this.error.next(err.message);
@@ -69,12 +68,12 @@ export class AddEmployeeComponent implements OnInit{
     })
   }
 
-  resolveDeptNameToId(dept_name:string): number {
+  resolveDeptNameToUuid(dept_name:string): string {
    let filtertedDept = this.allDepartments.filter((dept) => {
       return dept.dept_name === dept_name
     });
     this.filtertedDept = [...filtertedDept];    
-    return this.filtertedDept[0].dept_id;
+    return this.filtertedDept[0].uuid;
   }
 
 }

@@ -11,7 +11,7 @@ export class EmployeeServices {
   constructor(private http: HttpClient) { }
     
   //Create Emploee in database
-  addEmployee(employees: {name: string, designation: string, experience: number, dept_id:string, skills: string, image: string}):Observable<any> {
+  addEmployee(employees: {name: string, designation: string, experience: number, skills: string, image: string, departmentUuid:string}):Observable<any> {
     let token = localStorage.getItem('token');
     let header = new HttpHeaders()
     .set('content-type','application/json')

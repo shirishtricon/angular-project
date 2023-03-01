@@ -41,7 +41,7 @@ export class AllEmployeesComponent implements OnInit{
   ngOnInit(){
 
       this.fetchEmployees();
-      // this.fetchDepartments();
+      this.fetchDepartments();
 
     this.dataService.filterMessage$.subscribe(data => {
       
@@ -80,22 +80,26 @@ export class AllEmployeesComponent implements OnInit{
   }
 
   onDeleteEmployee() {
+    this.ngxService.start()
     this.employeeServices.deleteEmployee(this.uuidToBeDeleted);
+    
+    setTimeout(() => {
+      this.fetchEmployees();
+    },500)
+    this.ngxService.stop();
     this.acknowledgement = 'delete';
-    this.fetchEmployees();
-    this.ngxService.stop()
   }
 
   setDefaultValues(indx:number, id:string) {
    
    let employee = this.allEmployees[`${indx}`];
-   console.log(employee.dept_name);
+   console.log(employee.department.dept_name);
    
    this.form.form.patchValue({
     name: employee.name,
     designation: employee.designation,
     experience: employee.experience,
-    dept_name: employee.dept_name,
+    department: employee.department.dept_name,
     skills: employee.skills,
     image: employee.image
    });  
@@ -113,18 +117,20 @@ export class AllEmployeesComponent implements OnInit{
   
       name: form.value.name,
       designation: form.value.designation,
-      experience: form.value.experience,
-      dept_id: `${this.resolveDeptNameToId(form.value.department)}`,
+      experience: form.value.experience,      
       skills: form.value.skills,
-      image: form.value.image
+      image: form.value.image,
+      departmentUuid: `${this.resolveDeptNameToUuid(form.value.department)}`
     };
     console.log(updatedDetails);
     
     this.employeeServices.updateEmployee(this.currentUuid, updatedDetails);
     this.acknowledgement = 'update';
-    this.fetchEmployees();
+    setTimeout(() => {
+      this.fetchEmployees();
+    },500)
     this.ngxService.stop();
-    
+
   }
 
   fetchDepartments() {
@@ -140,12 +146,12 @@ export class AllEmployeesComponent implements OnInit{
    })
   }
 
-  resolveDeptNameToId(dept_name: string) {
+  resolveDeptNameToUuid(dept_name: string) {
     let filtertedDept = this.allDepartments.filter((dept) => {
       return dept.dept_name === dept_name
     });
     this.filtertedDept = [...filtertedDept];    
-    return this.filtertedDept[0].dept_id;
+    return this.filtertedDept[0].uuid;
   }
 
 }

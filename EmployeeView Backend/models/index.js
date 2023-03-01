@@ -30,8 +30,9 @@ db.departments.hasMany(db.employees);
 
 db.employees.belongsTo(db.departments)
 
-db.sequelize.sync({force: false})
+db.sequelize.sync({alter: true})
 .then(() => {
+  
     console.log('yes re-sync');
 })
 .catch((err) => {

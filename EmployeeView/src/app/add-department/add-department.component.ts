@@ -33,7 +33,7 @@ export class AddDepartmentComponent implements OnInit{
       this.departmentServices.addDepartment(department).subscribe((res) => {
         this.departmentAdded = 'Done';
         this.lastDeptId = res['result'][0].dept_id;
-        this.lastDeptName = res['result'][0].dept_name
+        this.lastDeptName = res['result'][0].dept_name;
         console.log(res['result'][0].dept_id);     
       }, (err) => {
           this.error.next(err.message);
