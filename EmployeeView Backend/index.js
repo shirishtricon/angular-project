@@ -4,7 +4,6 @@ var bodyParser = require("body-parser");
 const app = express();
 const secretKey = 'secretKey';
 const cors = require('cors');
-
 const dotenv = require("dotenv");
 const hrRoutes = require('./Routes/hrRoutes')
 
@@ -13,15 +12,12 @@ require('./models')
 app.use(cors({
     origin: '*'
 }));
+
 app.use(express.json());
 
 dotenv.config();
 
-
-
 app.use('/hr',hrRoutes);
-
-
 
 const hrDetails = {
     name: 'Shirish Kulkarni',
@@ -81,7 +77,6 @@ const generateToken = (res, role) => {
      jwt.sign((user),secretKey,{expiresIn: '300s'}, (err,token) => {
         res.status(200).json({token: token})
     });
-
 }
 
 app.listen(5000, () => {

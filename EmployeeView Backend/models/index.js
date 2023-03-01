@@ -1,7 +1,6 @@
 const { Sequelize,DataTypes } = require('sequelize');
 const dotenv = require("dotenv");
 
-
 dotenv.config();
 
 const sequelize = new Sequelize(process.env.database, process.env.user, process.env.password, {
@@ -27,12 +26,10 @@ db.departments = require('./departments')(sequelize, DataTypes);
 db.employees = require('./employees')(sequelize, DataTypes);
 
 db.departments.hasMany(db.employees);
-
 db.employees.belongsTo(db.departments)
 
 db.sequelize.sync({alter: true})
 .then(() => {
-  
     console.log('yes re-sync');
 })
 .catch((err) => {

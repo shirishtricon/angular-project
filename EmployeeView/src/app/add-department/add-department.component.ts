@@ -32,8 +32,8 @@ export class AddDepartmentComponent implements OnInit{
       }
       this.departmentServices.addDepartment(department).subscribe((res) => {
         this.departmentAdded = 'Done';
-        this.lastDeptId = res['result'][0].dept_id;
-        this.lastDeptName = res['result'][0].dept_name;
+        this.lastDeptId = res.result.dept_id;
+        this.lastDeptName = res.result.dept_name;
         console.log(res['result'][0].dept_id);     
       }, (err) => {
           this.error.next(err.message);
